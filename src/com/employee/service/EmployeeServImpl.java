@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.employee.dao.EmployeeMapper;
 import com.employee.model.Employee;
 @Service
+@Transactional
 public class EmployeeServImpl implements EmployeeService {
 
 	@Autowired
@@ -21,7 +23,11 @@ public class EmployeeServImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> getAllEmployees() {
+		System.out.println("Get Employees from service");
 		List<Employee> lis = emplDao.getAllEmployees();
+		for (Employee  employee : lis) {
+			System.out.println("/n values"+employee.getEmpName());
+		}
 		return lis;
 	}
 

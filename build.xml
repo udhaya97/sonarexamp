@@ -11,7 +11,9 @@
 	<property name="target.dir" location="target" />
 	<property name="target.temp.dir" location="target/temp" />
 	<property name="lib.dir" value="lib" />
-	
+	<property name="test.dir" value="test"/>
+	<property name="test.dir" location="src" />
+	<property name="report.dir" location="report" />
 	<!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
 	<property name="sonar.host.url" value="http://localhost:9000" />
 	 
@@ -86,6 +88,25 @@
 			<zipfileset dir="${web.dir}/resources" prefix="resources" />
 		</war>
 	</target>
+	
+			<!-- Run jUnit -->
+				<target name="junit" depends="compile">
+
+				  <junit printsummary="yes" haltonfailure="no">
+
+					<classpath refid="test.path" />
+					<classpath location="${web.classes.dir}" />
+
+					<formatter type="xml" />
+					<batchtest fork="yes" todir="${report.dir}">
+						<fileset dir="${test.dir}">
+							<include name="**/*Test*.java" />
+						</fileset>
+					</batchtest>
+
+				  </junit>
+				</target>
+
 
 	<!-- Create folders -->
 	<target name="init">
@@ -93,6 +114,8 @@
 		<mkdir dir="${target.dir}" />
 		<mkdir dir="${web.classes.dir}" />
 		<mkdir dir="${resources.dir}"/>
+		<mkdir dir="${report.dir}" />
+		
 		
 	</target>
 

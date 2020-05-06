@@ -16,12 +16,13 @@ public class EmployeeUtil {
 	
 	
 	public void resourc() {
-		
+		System.out.println("Entered resourc method");
 		Reader reader;
 		try
 		{
 		 reader=Resources.getResourceAsReader("resources/mybatis-config.xml");	
 		sessionFactory =  new SqlSessionFactoryBuilder().build(reader);
+		
 		}catch(IOException ie)
 		{
 			logger.info("A Stack Trace problem",ie);

@@ -54,6 +54,7 @@ public class EmployeeMapper {
 		SqlSession session = empUtil.getSqlSessionFactory().openSession();
 		
 		Employee sample =(Employee) session.selectOne("getEmployee",empId);	
+		
 		session.commit();
 		session.close();
 		
